@@ -7,8 +7,10 @@ function Todo() {
     const dispatch = useDispatch()
     const [input, setInput] = useState('')
 
-    const renderItems = items.map((item, index) => <li key={index} onClick={() => dispatch(removeOne(index))}>{item}</li>)
-
+    let renderItems = []
+    if (items) {
+        renderItems = items.map((item, index) => <li style={{ textAlign: 'left' }} key={index} onClick={() => dispatch(removeOne(index))}>{item}</li>)
+    }
     const submitForm = (e) => {
         e.preventDefault()
         dispatch(addTodo(input))
@@ -16,6 +18,7 @@ function Todo() {
 
     return (
         <div>
+            <h3>To Do List</h3>
             <form onSubmit={(e) => submitForm(e)}>
                 <input type="text" onChange={(e) => setInput(e.target.value)} />
                 <button type="submit">Submit</button>
